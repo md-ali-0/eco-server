@@ -5,7 +5,7 @@ import zodValid from './product.validation'
 
 const createProduct = async (req: Request, res: Response) => {
     const payload = req.body
-    
+
     try {
         const value = zodValid.parse(payload)
         const product = await ProductService.createProduct(value as IProduct)
@@ -29,7 +29,10 @@ const updateProduct = async (req: Request, res: Response) => {
 
     try {
         const value = zodValid.parse(upDoc)
-        const product = await ProductService.updateProduct(id, value as IProduct)
+        const product = await ProductService.updateProduct(
+            id,
+            value as IProduct,
+        )
         res.status(202).json({
             success: true,
             message: 'Product updated successfully!',
@@ -63,8 +66,15 @@ const deleteProduct = async (req: Request, res: Response) => {
 }
 
 const getAll = async (req: Request, res: Response) => {
+
+
     try {
-        const products = await ProductService.getAll()
+        let search: string = ""
+
+        if (req.query.searchTerm) {
+            search = req.query.searchTerm as string
+        }
+        const products = await ProductService.getAll(search)
         res.status(200).json({
             success: true,
             message: 'Products fetched successfully!',

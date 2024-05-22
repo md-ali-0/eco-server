@@ -55,8 +55,12 @@ const deleteProduct = async (id: string): Promise<IProduct | null> => {
     return result
 }
 
-const getAll = async (): Promise<IProduct[]> => {
-    const result = await Product.find()
+const getAll = async (search: string): Promise<IProduct[]> => {
+    const regex = new RegExp(search, 'i')
+
+    const result = await Product.find({
+        $or: [{ name: { $regex: regex } }, { description: { $regex: regex } }],
+    })
     return result
 }
 const getSingle = async (id: string): Promise<IProduct | null> => {
