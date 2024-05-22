@@ -11,6 +11,7 @@ const inventorySchema = new Schema<IInventory>(
         versionKey: false,
     },
 )
+
 const variantsSchema = new Schema<IVariants>(
     {
         type: { type: String, required: true },

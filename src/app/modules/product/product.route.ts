@@ -1,9 +1,8 @@
 import { Router } from 'express'
+import { ProductController } from './product.controller'
 
 const router = Router()
 
-router.get('/', (req, res)=>{
-    console.log('get route')
-})
+router.get('/', ProductController.getAll)
 
 export const ProductsRoute = router

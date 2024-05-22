@@ -1,13 +1,13 @@
-export type IInventory = {
+export interface IInventory {
     quantity: number
     inStock: boolean
 }
-export type IVariants = {
+export interface IVariants {
     type: string
     value: string
 }
 
-export type IProduct = {
+export interface IProduct {
     name: string
     description: string
     price: number
