@@ -6,7 +6,7 @@ const create = async (req: Request, res: Response) => {
 
     try {
         const product = await ProductService.create(payload)
-        res.status(200).json({
+        res.status(201).json({
             success: true,
             message: 'Product created successfully!',
             data: product,
@@ -25,7 +25,7 @@ const update = async (req: Request, res: Response) => {
     const upDoc = req.body
     try {
         const product = await ProductService.update(id, upDoc)
-        res.status(200).json({
+        res.status(202).json({
             success: true,
             message: 'Product updated successfully!',
             data: product,
