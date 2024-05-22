@@ -2,12 +2,12 @@ import { Types } from 'mongoose'
 import { IProduct } from './product.interface'
 import { Product } from './product.model'
 
-const create = async (payload: IProduct): Promise<IProduct | null> => {
+const createProduct = async (payload: IProduct): Promise<IProduct | null> => {
     const result = await Product.create(payload)
     return result
 }
 
-const update = async (
+const updateProduct = async (
     id: string,
     upDoc: IProduct,
 ): Promise<IProduct | null> => {
@@ -47,6 +47,14 @@ const update = async (
     return result
 }
 
+const deleteProduct = async (id: string): Promise<IProduct | null> => {
+    const result = await Product.findOneAndDelete(
+        { _id: new Types.ObjectId(id) },
+        { new: true },
+    )
+    return result
+}
+
 const getAll = async (): Promise<IProduct[]> => {
     const result = await Product.find()
     return result
@@ -57,8 +65,9 @@ const getSingle = async (id: string): Promise<IProduct | null> => {
 }
 
 export const ProductService = {
-    create,
+    createProduct,
     getAll,
     getSingle,
-    update,
+    updateProduct,
+    deleteProduct,
 }

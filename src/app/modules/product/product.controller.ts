@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { ProductService } from './product.service'
 
-const create = async (req: Request, res: Response) => {
+const createProduct = async (req: Request, res: Response) => {
     const payload = req.body
 
     try {
-        const product = await ProductService.create(payload)
+        const product = await ProductService.createProduct(payload)
         res.status(201).json({
             success: true,
             message: 'Product created successfully!',
@@ -20,15 +20,33 @@ const create = async (req: Request, res: Response) => {
     }
 }
 
-const update = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response) => {
     const id = req.params.productId
     const upDoc = req.body
     try {
-        const product = await ProductService.update(id, upDoc)
+        const product = await ProductService.updateProduct(id, upDoc)
         res.status(202).json({
             success: true,
             message: 'Product updated successfully!',
             data: product,
+        })
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: error.massage || 'Something Went Wrong',
+            error: error,
+        })
+    }
+}
+
+const deleteProduct = async (req: Request, res: Response) => {
+    const id = req.params.productId
+    try {
+        await ProductService.deleteProduct(id)
+        res.status(200).json({
+            success: true,
+            message: 'Product deleted successfully!',
+            data: null,
         })
     } catch (error: any) {
         res.status(500).json({
@@ -74,8 +92,9 @@ const getSingle = async (req: Request, res: Response) => {
 }
 
 export const ProductController = {
-    create,
+    createProduct,
     getAll,
     getSingle,
-    update,
+    updateProduct,
+    deleteProduct,
 }
