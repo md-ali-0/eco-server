@@ -79,7 +79,7 @@ This API provides functionality for managing products and orders in an e-commerc
 
     ```bash
     git clone https://github.com/md-ali-0/eco-server.git
-    cd <repository-directory>
+    cd eco-server
     ```
 
 2. **Install Dependencies**
