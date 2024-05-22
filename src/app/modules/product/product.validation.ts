@@ -6,13 +6,29 @@ const inventoryValidationSchema = z.object({
 })
 
 const variantsValidationSchema = z.object({
-    type: z.string().min(1, 'Type is required.'),
-    value: z.string().min(1, 'Value is required.'),
+    type: z.string({
+        required_error: 'type is required',
+        invalid_type_error: 'type must be a string',
+    }),
+    value: z.string({
+        required_error: 'Value is required',
+        invalid_type_error: 'Value must be a string',
+    }),
 })
 
 const ProductValidationSchema = z.object({
-    name: z.string().min(1, 'Name is required.').optional(),
-    description: z.string().min(1, 'Description is required.').optional(),
+    name: z
+        .string({
+            required_error: 'Name is required',
+            invalid_type_error: 'Name must be a string',
+        })
+        .optional(),
+    description: z
+        .string({
+            required_error: 'Description is required',
+            invalid_type_error: 'Description must be a string',
+        })
+        .optional(),
     price: z
         .number({
             required_error: 'Price is required',
@@ -20,7 +36,12 @@ const ProductValidationSchema = z.object({
         })
         .positive('Price must be positive.')
         .optional(),
-    category: z.string().min(1, 'Category is required.').optional(),
+    category: z
+        .string({
+            required_error: 'Category is required',
+            invalid_type_error: 'Category must be a string',
+        })
+        .optional(),
     tags: z.array(z.string().min(1)).min(1, 'Tags are required.').optional(),
     variants: z.array(variantsValidationSchema).optional(),
     inventory: inventoryValidationSchema,

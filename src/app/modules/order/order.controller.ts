@@ -1,12 +1,14 @@
 import { Request, Response } from 'express'
+import { IOrder } from './order.interface'
 import { OrderService } from './order.service'
+import zodValid from './order.validation'
 
 const createOrder = async (req: Request, res: Response) => {
     const payload = req.body
 
     try {
-        // const value = zodValid.parse(payload)
-        const order = await OrderService.createOrder(payload)
+        const value = zodValid.parse(payload)
+        const order = await OrderService.createOrder(value as IOrder)
         res.status(201).json({
             success: true,
             message: 'Order created successfully!',
@@ -20,6 +22,7 @@ const createOrder = async (req: Request, res: Response) => {
         })
     }
 }
+
 const getAllOrders = async (req: Request, res: Response) => {
     try {
         let search: { email?: string } = {}
