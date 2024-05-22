@@ -1,18 +1,18 @@
-export interface IInventory {
+export type IInventory = {
     quantity: number
     inStock: boolean
 }
-export interface IVariants {
+export type IVariants = {
     type: string
     value: string
 }
 
-export interface IProduct {
+export type IProduct = {
     name: string
     description: string
     price: number
     category: string
-    tags: []
+    tags: string[]
     variants: IVariants[]
     inventory: IInventory
 }
