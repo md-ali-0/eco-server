@@ -17,7 +17,7 @@ const createProduct = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error.massage || 'Something Went Wrong',
+            message: error.message || 'Something Went Wrong',
             error: error,
         })
     }
@@ -41,7 +41,7 @@ const updateProduct = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error.massage || 'Something Went Wrong',
+            message: error.message || 'Something Went Wrong',
             error: error,
         })
     }
@@ -59,7 +59,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error.massage || 'Something Went Wrong',
+            message: error.message || 'Something Went Wrong',
             error: error,
         })
     }
@@ -83,7 +83,7 @@ const getAll = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error.massage || 'Something Went Wrong',
+            message: error.message || 'Something Went Wrong',
             error: error,
         })
     }
@@ -100,7 +100,7 @@ const getSingle = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(500).json({
             success: false,
-            message: error.massage || 'Something Went Wrong',
+            message: error.message || 'Something Went Wrong',
             error: error,
         })
     }

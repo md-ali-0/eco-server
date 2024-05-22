@@ -1,5 +1,5 @@
 import cors from 'cors'
-import express, { Application, Request, Response } from 'express'
+import express, { Application, NextFunction, Request, Response } from 'express'
 import router from './app/routes'
 
 const app: Application = express()
@@ -14,23 +14,22 @@ app.use('/api', router)
 app.get('/', (req: Request, res: Response) => {
     res.status(200).json({
         status: true,
-        massage: 'Server Running Successfully',
+        message: 'Server Running Successfully',
     })
 })
 
-// globalErrorHandler
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-//     err.statusCode = err.statusCode || 500;
-//     err.status = err.status || 'error';
+// 404 handler
+app.all('*', (req: Request, res: Response, next: NextFunction) => {
+    const error = new Error('Route not found')
+    next(error)
+})
 
-//     res.status(err.statusCode).json({
-//         success: false,
-//         message: err.message || 'Something went wrong',
-//     });
-// });
-
-// app.all('*', (req: Request, res: Response, next: NextFunction) => {
-//     next(new Error(`Cannot find ${req.originalUrl} on this server!`));
-// });
+// Global error handler
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    res.status(err.statusCode || 500).json({
+        status: false,
+        message: err.message || 'Something went wrong',
+    })
+})
 
 export default app

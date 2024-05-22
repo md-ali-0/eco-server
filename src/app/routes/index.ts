@@ -5,6 +5,6 @@ import { ProductsRoute } from "../modules/product/product.route";
 const router = Router()
 
 router.use('/products', ProductsRoute)
-router.use('/products', OrderRouter)
+router.use('/orders', OrderRouter)
 
 export default router
