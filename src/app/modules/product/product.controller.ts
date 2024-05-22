@@ -1,11 +1,13 @@
 import { Request, Response } from 'express'
+import { IProduct } from './product.interface'
 import { ProductService } from './product.service'
+import zodValid from './product.validation'
 
 const createProduct = async (req: Request, res: Response) => {
     const payload = req.body
-
+    const value = zodValid.parse(payload)
     try {
-        const product = await ProductService.createProduct(payload)
+        const product = await ProductService.createProduct(value as IProduct)
         res.status(201).json({
             success: true,
             message: 'Product created successfully!',
@@ -23,8 +25,9 @@ const createProduct = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
     const id = req.params.productId
     const upDoc = req.body
+    const value = zodValid.parse(upDoc)
     try {
-        const product = await ProductService.updateProduct(id, upDoc)
+        const product = await ProductService.updateProduct(id, value as IProduct)
         res.status(202).json({
             success: true,
             message: 'Product updated successfully!',
