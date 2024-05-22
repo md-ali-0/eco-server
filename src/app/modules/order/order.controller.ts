@@ -25,7 +25,7 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getAllOrders = async (req: Request, res: Response) => {
     try {
-        let search: { email?: string } = {}
+        const search: { email?: string } = {}
         if (req.query.email) {
             search.email = req.query.email as string
         }

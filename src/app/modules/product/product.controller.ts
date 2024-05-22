@@ -66,10 +66,8 @@ const deleteProduct = async (req: Request, res: Response) => {
 }
 
 const getAll = async (req: Request, res: Response) => {
-
-
     try {
-        let search: string = ""
+        let search: string = ''
 
         if (req.query.searchTerm) {
             search = req.query.searchTerm as string

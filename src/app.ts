@@ -25,7 +25,7 @@ app.all('*', (req: Request, res: Response, next: NextFunction) => {
 })
 
 // Global error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response) => {
     res.status(err.statusCode || 500).json({
         status: false,
         message: err.message || 'Something went wrong',
