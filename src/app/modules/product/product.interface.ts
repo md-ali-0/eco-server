@@ -1,3 +1,4 @@
+
 export interface IInventory {
     quantity: number
     inStock: boolean
