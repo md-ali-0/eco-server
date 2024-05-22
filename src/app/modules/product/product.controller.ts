@@ -5,8 +5,9 @@ import zodValid from './product.validation'
 
 const createProduct = async (req: Request, res: Response) => {
     const payload = req.body
-    const value = zodValid.parse(payload)
+    
     try {
+        const value = zodValid.parse(payload)
         const product = await ProductService.createProduct(value as IProduct)
         res.status(201).json({
             success: true,
@@ -25,8 +26,9 @@ const createProduct = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
     const id = req.params.productId
     const upDoc = req.body
-    const value = zodValid.parse(upDoc)
+
     try {
+        const value = zodValid.parse(upDoc)
         const product = await ProductService.updateProduct(id, value as IProduct)
         res.status(202).json({
             success: true,

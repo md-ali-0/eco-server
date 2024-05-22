@@ -18,4 +18,19 @@ app.get('/', (req: Request, res: Response) => {
     })
 })
 
+// globalErrorHandler
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+//     err.statusCode = err.statusCode || 500;
+//     err.status = err.status || 'error';
+
+//     res.status(err.statusCode).json({
+//         success: false,
+//         message: err.message || 'Something went wrong',
+//     });
+// });
+
+// app.all('*', (req: Request, res: Response, next: NextFunction) => {
+//     next(new Error(`Cannot find ${req.originalUrl} on this server!`));
+// });
+
 export default app
